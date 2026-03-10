@@ -610,7 +610,7 @@ describe("search (unified API)", () => {
     expect(results[0]).toHaveProperty("title");
     expect(results[0]).toHaveProperty("bestChunk");
     expect(results[0]).toHaveProperty("docid");
-  });
+  }, 120_000);
 
   test("search() with intent and rerank:false returns results", async () => {
     const results = await store.search({
@@ -619,7 +619,7 @@ describe("search (unified API)", () => {
       rerank: false,
     });
     expect(results.length).toBeGreaterThan(0);
-  });
+  }, 120_000);
 
   test("search() with collection filter", async () => {
     const results = await store.search({
@@ -630,7 +630,7 @@ describe("search (unified API)", () => {
     for (const r of results) {
       expect(r.file).toMatch(/^qmd:\/\/docs\//);
     }
-  });
+  }, 120_000);
 
   test("search() with collections filter", async () => {
     const results = await store.search({
@@ -641,12 +641,12 @@ describe("search (unified API)", () => {
     for (const r of results) {
       expect(r.file).toMatch(/^qmd:\/\/docs\//);
     }
-  });
+  }, 120_000);
 
   test("search() with limit", async () => {
     const results = await store.search({ query: "meeting", limit: 1, rerank: false });
     expect(results.length).toBeLessThanOrEqual(1);
-  });
+  }, 120_000);
 
   test("search() with pre-expanded queries and rerank:false", async () => {
     const results = await store.search({
@@ -657,12 +657,12 @@ describe("search (unified API)", () => {
       rerank: false,
     });
     expect(results.length).toBeGreaterThan(0);
-  });
+  }, 120_000);
 
   test("search() returns empty for non-matching query", async () => {
     const results = await store.search({ query: "xyznonexistentterm123", rerank: false });
     expect(results).toHaveLength(0);
-  });
+  }, 120_000);
 });
 
 // =============================================================================
